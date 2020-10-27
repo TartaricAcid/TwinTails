@@ -1,0 +1,18 @@
+
+{
+  "type": "minecraft:crafting_shapeless",
+  "result": {
+    "item": "twintails:hairband",
+    "data": 5
+  },
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyePink"
+    },
+    {
+      "item": "twintails:hairband",
+      "data": 32767
+    }
+  ]
+}

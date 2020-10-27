@@ -1,0 +1,23 @@
+
+{
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "twintails:hairband",
+    "data": 4
+  },
+  "pattern": [
+    " W ",
+    "WSW",
+    " W "
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:wool",
+      "data": 9
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "slimeball"
+    }
+  }
+}
