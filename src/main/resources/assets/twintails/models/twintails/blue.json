@@ -1,0 +1,9 @@
+{
+  "loader": "forge:obj",
+  "model": "twintails:models/twintails/blue.obj",
+  "textures": {
+    "1": "twintails:twintails/blue",
+    "particle": "twintails:twintails/blue"
+  },
+  "flip_v": true
+}
