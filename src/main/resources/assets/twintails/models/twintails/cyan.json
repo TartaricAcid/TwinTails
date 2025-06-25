@@ -1,0 +1,9 @@
+{
+  "loader": "neoforge:obj",
+  "model": "twintails:models/twintails/cyan.obj",
+  "textures": {
+    "1": "twintails:twintails/cyan",
+    "particle": "twintails:twintails/cyan"
+  },
+  "flip_v": true
+}
