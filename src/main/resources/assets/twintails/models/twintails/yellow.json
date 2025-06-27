@@ -1,0 +1,9 @@
+{
+  "loader": "forge:obj",
+  "model": "twintails:models/twintails/yellow.obj",
+  "textures": {
+    "1": "twintails:twintails/yellow",
+    "particle": "twintails:twintails/yellow"
+  },
+  "flip_v": true
+}
