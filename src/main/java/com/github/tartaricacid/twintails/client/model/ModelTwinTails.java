@@ -2,7 +2,6 @@ package com.github.tartaricacid.twintails.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -14,6 +13,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Quaternionf;
 
 public class ModelTwinTails extends EntityModel<Entity> {
     private final ResourceLocation modelResource;
@@ -41,11 +41,14 @@ public class ModelTwinTails extends EntityModel<Entity> {
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         poseStack.pushPose();
 
-        poseStack.mulPose(Axis.ZP.rotation(rotationZ));
-        poseStack.mulPose(Axis.YP.rotation(rotationY));
-        poseStack.mulPose(Axis.XP.rotation(rotationX));
-        poseStack.translate(offsetX, offsetY, offsetZ);
-        poseStack.scale(-scaleX, -scaleY, scaleZ);
+        poseStack.translate(offsetX / 16.0F, offsetY / 16.0F, offsetZ / 16.0F);
+        if (this.rotationX != 0.0F || this.rotationY != 0.0F || this.rotationZ != 0.0F) {
+            poseStack.mulPose((new Quaternionf()).rotationZYX(this.rotationZ, this.rotationY, this.rotationX));
+        }
+        if (this.scaleX != 1.0F || this.scaleY != 1.0F || this.scaleZ != 1.0F) {
+            poseStack.scale(scaleX, scaleY, scaleZ);
+        }
+        poseStack.scale(-1, -1, 1);
 
         RenderType renderType = Sheets.cutoutBlockSheet();
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
