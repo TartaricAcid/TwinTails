@@ -1,6 +1,7 @@
 package com.github.tartaricacid.twintails.item;
 
 import com.github.tartaricacid.twintails.client.model.ModelTwinTails;
+import com.google.common.collect.Lists;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -24,12 +25,14 @@ import java.util.List;
 import static com.github.tartaricacid.twintails.init.TailTabs.TWIN_TAILS_TAB;
 
 public class ItemHairBand extends ArmorItem {
+    public static final List<ItemHairBand> ALL_TWIN_TAILS = Lists.newArrayList();
     private final TwinTailType twinTailType;
     private ModelTwinTails modelTwinTailsCache = null;
 
     public ItemHairBand(TwinTailType twinTailType) {
         super(ArmorMaterial.CHAIN, EquipmentSlotType.HEAD, new Item.Properties().durability(0).tab(TWIN_TAILS_TAB));
         this.twinTailType = twinTailType;
+        ALL_TWIN_TAILS.add(this);
     }
 
     @SuppressWarnings("all")
@@ -74,7 +77,7 @@ public class ItemHairBand extends ArmorItem {
         if (modelTwinTailsCache == null) {
             modelTwinTailsCache = new ModelTwinTails(twinTailType.getModelLocation());
         }
-        modelTwinTailsCache.copyFrom(originalModel.head);
+        //modelTwinTailsCache.copyFrom(originalModel.head);
         return (A) modelTwinTailsCache;
     }
 }

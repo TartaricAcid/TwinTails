@@ -19,13 +19,6 @@ import net.minecraft.util.math.vector.Vector3f;
 public class ModelTwinTails extends BipedModel<LivingEntity> {
     private final ResourceLocation modelResource;
 
-    private float rotationX = 0.0F;
-    private float rotationY = 0.0F;
-    private float rotationZ = 0.0F;
-    private float offsetX = 0;
-    private float offsetY = 0;
-    private float offsetZ = 0;
-
     public ModelTwinTails(ResourceLocation modelResource) {
         super(0.5f);
         this.modelResource = modelResource;
@@ -37,12 +30,23 @@ public class ModelTwinTails extends BipedModel<LivingEntity> {
 
     @Override
     public void renderToBuffer(MatrixStack poseStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        ModelRenderer headPart = this.head;
+        if (headPart == null) {
+            return;
+        }
+
         poseStack.pushPose();
 
-        poseStack.mulPose(Vector3f.ZP.rotation(rotationZ));
-        poseStack.mulPose(Vector3f.YP.rotation(rotationY));
-        poseStack.mulPose(Vector3f.XP.rotation(rotationX));
-        poseStack.translate(offsetX, offsetY, offsetZ);
+        poseStack.translate(headPart.x / 16.0F, headPart.y / 16.0F, headPart.z / 16.0F);
+        if (headPart.zRot != 0.0F) {
+            poseStack.mulPose(Vector3f.ZP.rotation(headPart.zRot));
+        }
+        if (headPart.yRot != 0.0F) {
+            poseStack.mulPose(Vector3f.YP.rotation(headPart.yRot));
+        }
+        if (headPart.xRot != 0.0F) {
+            poseStack.mulPose(Vector3f.XP.rotation(headPart.xRot));
+        }
         poseStack.scale(-1, -1, 1);
 
         RenderType renderType = Atlases.cutoutBlockSheet();
@@ -53,14 +57,5 @@ public class ModelTwinTails extends BipedModel<LivingEntity> {
         itemRenderer.renderModelLists(bakedModel, ItemStack.EMPTY, packedLight, packedOverlay, poseStack, vertexConsumer);
 
         poseStack.popPose();
-    }
-
-    public void copyFrom(ModelRenderer headPart) {
-        this.rotationX = headPart.xRot;
-        this.rotationY = headPart.yRot;
-        this.rotationZ = headPart.zRot;
-        this.offsetX = headPart.x;
-        this.offsetY = headPart.y;
-        this.offsetZ = headPart.z;
     }
 }
