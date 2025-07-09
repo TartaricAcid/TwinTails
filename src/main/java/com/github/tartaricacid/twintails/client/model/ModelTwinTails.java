@@ -38,10 +38,16 @@ public class ModelTwinTails extends EntityModel<Entity> {
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         poseStack.pushPose();
 
-        poseStack.mulPose(Vector3f.ZP.rotation(rotationZ));
-        poseStack.mulPose(Vector3f.YP.rotation(rotationY));
-        poseStack.mulPose(Vector3f.XP.rotation(rotationX));
-        poseStack.translate(offsetX, offsetY, offsetZ);
+        poseStack.translate(offsetX / 16.0F, offsetY / 16.0F, offsetZ / 16.0F);
+        if (this.rotationZ != 0.0F) {
+            poseStack.mulPose(Vector3f.ZP.rotation(this.rotationZ));
+        }
+        if (this.rotationY != 0.0F) {
+            poseStack.mulPose(Vector3f.YP.rotation(this.rotationY));
+        }
+        if (this.rotationX != 0.0F) {
+            poseStack.mulPose(Vector3f.XP.rotation(this.rotationX));
+        }
         poseStack.scale(-1, -1, 1);
 
         RenderType renderType = Sheets.cutoutBlockSheet();
