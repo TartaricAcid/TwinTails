@@ -1,6 +1,7 @@
 package com.github.tartaricacid.twintails.item;
 
 import com.github.tartaricacid.twintails.client.model.ModelTwinTails;
+import com.google.common.collect.Lists;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
@@ -25,11 +26,13 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ItemHairBand extends ArmorItem {
+    public static final List<ItemHairBand> ALL_TWIN_TAILS = Lists.newArrayList();
     private final TwinTailType twinTailType;
 
     public ItemHairBand(TwinTailType twinTailType) {
         super(ArmorMaterials.CHAIN, Type.HELMET, new Item.Properties().durability(0));
         this.twinTailType = twinTailType;
+        ALL_TWIN_TAILS.add(this);
     }
 
     @SuppressWarnings("all")
